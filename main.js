@@ -4,101 +4,71 @@ var state = false;
 
 const style = document.getElementsByTagName('style')[0];
 
+async function loadImage(url) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'blob';
+
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        const imgUrl = URL.createObjectURL(xhr.response);
+        resolve(imgUrl);
+      } else {
+        reject(`Failed to load image: ${url}`);
+      }
+    };
+
+    xhr.onerror = () => reject(`Network error for image: ${url}`);
+    xhr.send();
+  });
+}
+
+async function setBackgroundImage(selector, url) {
+  const imgUrl = await loadImage(url);
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.src = imgUrl;
+    img.onload = () => {
+      style.innerHTML += `${selector}{background-image: url('${imgUrl}');}`;
+      resolve();
+    };
+  });
+}
+
+async function setLogoImage(selector, url) {
+  const imgUrl = await loadImage(url);
+  return new Promise((resolve) => {
+    const img = document.querySelector(selector);
+    img.src = imgUrl;
+    img.onload = () => resolve();
+  });
+}
+
 async function loadDarkend() {
-  const xhr = new XMLHttpRequest();
-
-  xhr.open('GET', './darkened.jpg', true);
-  xhr.responseType = 'blob'; // Указываем, что ожидаем blob (байтовые данные)
-
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      const imgUrl = URL.createObjectURL(xhr.response);
-
-      // Находим нужный элемент и устанавливаем background-image
-      style.innerHTML += `#one-section > div:last-child::before {background-image: url('${imgUrl}') ; }`;
-    }
-  };
-
-  xhr.send();
+  await setBackgroundImage('#one-section > div:last-child::before', './darkened.jpg');
 }
+
 async function loadLauncher() {
-  const xhr = new XMLHttpRequest();
-
-  xhr.open('GET', './launcher.jpg', true);
-  xhr.responseType = 'blob'; // Указываем, что ожидаем blob (байтовые данные)
-
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      const imgUrl = URL.createObjectURL(xhr.response);
-
-      // Находим нужный элемент и устанавливаем background-image
-      style.innerHTML += `#launcher{background-image: url('${imgUrl}');}`;
-    }
-  };
-
-  xhr.send();
+  await setBackgroundImage('#launcher', './launcher.jpg');
 }
+
 async function loadShop() {
-  const xhr = new XMLHttpRequest();
-
-  xhr.open('GET', './shop.jpg', true);
-  xhr.responseType = 'blob'; // Указываем, что ожидаем blob (байтовые данные)
-
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      const imgUrl = URL.createObjectURL(xhr.response);
-
-      // Находим нужный элемент и устанавливаем background-image
-      style.innerHTML += `#shop{background-image: url('${imgUrl}');}`;
-    }
-  };
-
-  xhr.send();
+  await setBackgroundImage('#shop', './shop.jpg');
 }
+
 async function loadFAQ() {
-  const xhr = new XMLHttpRequest();
-
-  xhr.open('GET', './faq.jpg', true);
-  xhr.responseType = 'blob'; // Указываем, что ожидаем blob (байтовые данные)
-
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      const imgUrl = URL.createObjectURL(xhr.response);
-
-      // Находим нужный элемент и устанавливаем background-image
-      style.innerHTML += `#faq{background-image: url('${imgUrl}');}`;
-    }
-  };
-
-  xhr.send();
+  await setBackgroundImage('#faq', './faq.jpg');
 }
 
 async function loadLogo() {
-  const xhr = new XMLHttpRequest();
-
-  xhr.open('GET', './svg.svg', true);
-  xhr.responseType = 'blob'; // Указываем, что ожидаем blob (байтовые данные)
-
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      const imgUrl = URL.createObjectURL(xhr.response);
-
-      // Находим нужный элемент и устанавливаем background-image
-      document.getElementById('header_logo').querySelector('img').src = imgUrl;
-      document.getElementById('footer-logo').querySelector('img').src = imgUrl;
-    }
-  };
-
-  xhr.send();
+  await Promise.all([setLogoImage('#header_logo img', './svg.svg'), setLogoImage('#footer-logo img', './svg.svg')]);
 }
 
 async function main() {
   await loadLogo();
-  await loadDarkend();
-  await loadLauncher();
-  await loadShop();
-  await loadFAQ();
-  document.getElementsByTagName('preloader')[0].setAttribute('close', '');
+  await Promise.all([loadDarkend(), loadLauncher(), loadShop(), loadFAQ()]);
+  document.querySelector('preloader').setAttribute('close', '');
 }
 
 window.onload = () => {
