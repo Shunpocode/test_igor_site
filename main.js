@@ -7,7 +7,7 @@ const style = document.getElementsByTagName('style')[0];
 async function loadDarkend() {
   const xhr = new XMLHttpRequest();
 
-  xhr.open('GET', 'https://shunpocode.github.io/test_igor_site/darkened.jpg', true);
+  xhr.open('GET', './darkened.jpg', true);
   xhr.responseType = 'blob'; // Указываем, что ожидаем blob (байтовые данные)
 
   xhr.onload = function () {
@@ -24,7 +24,7 @@ async function loadDarkend() {
 async function loadLauncher() {
   const xhr = new XMLHttpRequest();
 
-  xhr.open('GET', 'https://shunpocode.github.io/test_igor_site/launcher.jpg', true);
+  xhr.open('GET', './launcher.jpg', true);
   xhr.responseType = 'blob'; // Указываем, что ожидаем blob (байтовые данные)
 
   xhr.onload = function () {
@@ -41,7 +41,7 @@ async function loadLauncher() {
 async function loadShop() {
   const xhr = new XMLHttpRequest();
 
-  xhr.open('GET', 'https://shunpocode.github.io/test_igor_site/shop.jpg', true);
+  xhr.open('GET', './shop.jpg', true);
   xhr.responseType = 'blob'; // Указываем, что ожидаем blob (байтовые данные)
 
   xhr.onload = function () {
@@ -58,7 +58,7 @@ async function loadShop() {
 async function loadFAQ() {
   const xhr = new XMLHttpRequest();
 
-  xhr.open('GET', 'https://shunpocode.github.io/test_igor_site/faq.jpg', true);
+  xhr.open('GET', './faq.jpg', true);
   xhr.responseType = 'blob'; // Указываем, что ожидаем blob (байтовые данные)
 
   xhr.onload = function () {
@@ -76,7 +76,7 @@ async function loadFAQ() {
 async function loadLogo() {
   const xhr = new XMLHttpRequest();
 
-  xhr.open('GET', 'https://shunpocode.github.io/test_igor_site/svg.svg', true);
+  xhr.open('GET', './svg.svg', true);
   xhr.responseType = 'blob'; // Указываем, что ожидаем blob (байтовые данные)
 
   xhr.onload = function () {
@@ -93,11 +93,11 @@ async function loadLogo() {
 }
 
 async function main() {
-  //   await loadLogo();
-  //   await loadDarkend();
-  //   await loadLauncher();
-  //   await loadShop();
-  //   await loadFAQ();
+  await loadLogo();
+  await loadDarkend();
+  await loadLauncher();
+  await loadShop();
+  await loadFAQ();
   document.getElementsByTagName('preloader')[0].setAttribute('close', '');
 }
 
