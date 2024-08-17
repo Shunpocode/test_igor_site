@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="./main.css">
+	<script src="./main.js" async></script>
+	<link rel="shortcut icon" href="./favicon-32x32.png" type="image/png">
+	<title>Exarcheia</title>
+</head>
+
+<style>
+	preloader {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		top: 0;
+		background: var(--body-bg);
+		z-index: 1000;
+		transition: .3s ease-in-out;
+		opacity: 1;
+	}
+
+	preloader[close] {
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	/* HTML: <div class="loader"></div> */
+	.loader {
+		width: 40px;
+		height: 20px;
+		--c: no-repeat radial-gradient(farthest-side, white 93%, #0000);
+		background:
+			var(--c) 0 0,
+			var(--c) 50% 0;
+		background-size: 8px 8px;
+		position: relative;
+		clip-path: inset(-200% -100% 0 0);
+		animation: l6-0 1.5s linear infinite;
+	}
+
+	.loader:before {
+		content: "";
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		background: white;
+		left: -16px;
+		top: 0;
+		animation:
+			l6-1 1.5s linear infinite,
+			l6-2 0.5s cubic-bezier(0, 200, 0.8, 200) infinite;
+	}
+
+	.loader:after {
+		content: "";
+		position: absolute;
+		inset: 0 0 auto auto;
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: white;
+		animation: l6-3 1.5s linear infinite;
+	}
+
+	@keyframes l6-0 {
+
+		0%,
+		30% {
+			background-position:
+				0 0,
+				50% 0;
+		}
+
+		33% {
+			background-position:
+				0 100%,
+				50% 0;
+		}
+
+		41%,
+		63% {
+			background-position:
+				0 0,
+				50% 0;
+		}
+
+		66% {
+			background-position:
+				0 0,
+				50% 100%;
+		}
+
+		74%,
+		100% {
+			background-position:
+				0 0,
+				50% 0;
+		}
+	}
+
+	@keyframes l6-1 {
+		90% {
+			transform: translateY(0);
+		}
+
+		95% {
+			transform: translateY(15px);
+		}
+
+		100% {
+			transform: translateY(15px);
+			left: calc(100% - 8px);
+		}
+	}
+
+	@keyframes l6-2 {
+		100% {
+			top: -0.1px;
+		}
+	}
+
+	@keyframes l6-3 {
+
+		0%,
+		80%,
+		100% {
+			transform: translate(0);
+		}
+
+		90% {
+			transform: translate(26px);
+		}
+	}
+</style>
+
+<body>
+	<preloader>
+		<div class="loader"></div>
+	</preloader>
+	<main>
+		<div id="menu">
+			<button id="close-menu">close</button>
+			<button>Войти</button>
+			<button>Регистрация</button>
+			<div>
+				<button>Магазинт</button>
+				<button>Форум</button>
+				<button>Рейтинг</button>
+				<button>Маркет</button>
+			</div>
+		</div>
+		<header id="header">
+			<div id="header_logo">
+				<img src="" alt="">
+				<h3>Exarcheia</h3>
+			</div>
+			<div id="header_search">
+				<input type="text" name="" id="">
+				<button id="search-clear-svg" class="svg-wrapper">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="28px">
+						<path d="m480-439.5-209 209q-9 9-20.5 9t-20-9q-9-9-8.75-20.25t8.75-19.75l209-209.5-209-209.5q-8.5-8.5-8.5-19.75t8.5-20.25q8.5-9 20-9T271-730l209 209.5L689.5-730q8.5-8.5 20-8.5t20.5 9q8.5 9 8.25 20.25t-8.75 19.75L520.5-480l209 209.5q8.5 8.5 8.5 19.75t-8.5 20.25q-8.5 9-20 9t-20-9L480-439.5Z" />
+					</svg>
+				</button>
+				<div id="search-list">
+
+				</div>
+			</div>
+
+			<nav>
+				<a href="">Скачать</a><a href="">Магазин</a><a href="">Форум</a><a href="">Рейтинг</a><a href="">Маркет</a>
+			</nav>
+			<button id="header-user" class="svg-wrapper">
+				<svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#fff">
+					<path d="M480-480.67q-66 0-109.67-43.66Q326.67-568 326.67-634t43.66-109.67Q414-787.33 480-787.33t109.67 43.66Q633.33-700 633.33-634t-43.66 109.67Q546-480.67 480-480.67Zm-320 254V-260q0-36.67 18.5-64.17T226.67-366q65.33-30.33 127.66-45.5 62.34-15.17 125.67-15.17t125.33 15.5q62 15.5 127.28 45.3 30.54 14.42 48.96 41.81Q800-296.67 800-260v33.33q0 27.5-19.58 47.09Q760.83-160 733.33-160H226.67q-27.5 0-47.09-19.58Q160-199.17 160-226.67Zm66.67 0h506.66V-260q0-14.33-8.16-27-8.17-12.67-20.5-19-60.67-29.67-114.34-41.83Q536.67-360 480-360t-111 12.17Q314.67-335.67 254.67-306q-12.34 6.33-20.17 19-7.83 12.67-7.83 27v33.33ZM480-547.33q37 0 61.83-24.84Q566.67-597 566.67-634t-24.84-61.83Q517-720.67 480-720.67t-61.83 24.84Q393.33-671 393.33-634t24.84 61.83Q443-547.33 480-547.33Zm0-86.67Zm0 407.33Z" />
+				</svg>
+			</button>
+			<button id="open-menu" class="burger"><span></span> <span></span> <span></span></button>
+		</header>
+		<section id="one-section">
+			<div>
+				<div>
+					<h1>Полуанархический сервер Minecraft</h1>
+					<button class='anim-button $customClass'>
+						<div class='anim-button-before'>
+							<svg xmlns='http://www.w3.org/2000/svg' height='27px' viewBox='0 -960 960 960'>
+								<path d='M480-480.67q-66 0-109.67-43.66Q326.67-568 326.67-634t43.66-109.67Q414-787.33 480-787.33t109.67 43.66Q633.33-700 633.33-634t-43.66 109.67Q546-480.67 480-480.67Zm-320 254V-260q0-36.67 18.5-64.17T226.67-366q65.33-30.33 127.66-45.5 62.34-15.17 125.67-15.17t125.33 15.5q62 15.5 127.34 45.17 30.33 14.33 48.83 41.83T800-260v33.33q0 27.67-19.5 47.17T733.33-160H226.67q-27.67 0-47.17-19.5T160-226.67Z' />
+							</svg>
+						</div>
+						<span>Регистарция</span>
+					</button>
+					<span id="one-section-subtitle">
+						У нас очень красивая генерация мира, между прочим. Я за нее 35 баксов отдал, ибо я не мерзкий пират.
+						<span><strong>Игорь линк</strong>создатель</span>
+					</span>
+				</div>
+			</div>
+			<div></div>
+		</section>
+		<!-- <button onclick="loadImage()">asd</button> -->
+		<section id="subheader">
+			<div class="subheader-card" id="launcher">
+				<svg xmlns="http://www.w3.org/2000/svg" height="92px" viewBox="0 -960 960 960" fill="#fff">
+					<path d="M186.67-120q-27 0-46.84-19.83Q120-159.67 120-186.67v-586.66q0-27 19.83-46.84Q159.67-840 186.67-840h586.66q27 0 46.84 19.83Q840-800.33 840-773.33v586.66q0 27-19.83 46.84Q800.33-120 773.33-120H186.67Zm0-66.67h586.66v-586.66H186.67v586.66Z" />
+				</svg>
+				<h2>Наш лаунчер</h2>
+				<span>Для входа на сервер необходимо скачать наш лаунчер</span>
+				<button class='anim-button $customClass'>
+					<div class='anim-button-before'>
+						<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
+							<path d="M480-337q-8 0-15-2.5t-13-8.5L308-492q-12-12-11.5-28t11.5-28q12-12 28.5-12.5T365-549l75 75v-286q0-17 11.5-28.5T480-800q17 0 28.5 11.5T520-760v286l75-75q12-12 28.5-11.5T652-548q11 12 11.5 28T652-492L508-348q-6 6-13 8.5t-15 2.5ZM240-160q-33 0-56.5-23.5T160-240v-80q0-17 11.5-28.5T200-360q17 0 28.5 11.5T240-320v80h480v-80q0-17 11.5-28.5T760-360q17 0 28.5 11.5T800-320v80q0 33-23.5 56.5T720-160H240Z" />
+						</svg>
+					</div>
+					<span>Скачать лаунчер</span>
+				</button>
+			</div>
+			<div class="subheader-card" id="shop">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="92px" fill="#fff">
+					<path d="M240-80q-33 0-56.5-23.5T160-160v-480q0-33 23.5-56.5T240-720h80q0-66 47-113t113-47q66 0 113 47t47 113h80q33 0 56.5 23.5T800-640v480q0 33-23.5 56.5T720-80H240Zm0-80h480v-480h-80v80q0 17-11.5 28.5T600-520q-17 0-28.5-11.5T560-560v-80H400v80q0 17-11.5 28.5T360-520q-17 0-28.5-11.5T320-560v-80h-80v480Zm160-560h160q0-33-23.5-56.5T480-800q-33 0-56.5 23.5T400-720ZM240-160v-480 480Z" />
+				</svg>
+				<h2>Магазин</h2>
+				<span>В магазине ты можешь купить улучшения для своего аккаунта</span>
+				<button class='anim-button $customClass'>
+					<div class='anim-button-before'>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#fff">
+							<path d="M240-80q-33 0-56.5-23.5T160-160v-480q0-33 23.5-56.5T240-720h80q0-66 47-113t113-47q66 0 113 47t47 113h80q33 0 56.5 23.5T800-640v480q0 33-23.5 56.5T720-80H240Zm0-80h480v-480h-80v80q0 17-11.5 28.5T600-520q-17 0-28.5-11.5T560-560v-80H400v80q0 17-11.5 28.5T360-520q-17 0-28.5-11.5T320-560v-80h-80v480Zm160-560h160q0-33-23.5-56.5T480-800q-33 0-56.5 23.5T400-720ZM240-160v-480 480Z" />
+						</svg>
+					</div>
+					<span>Перейти в магазин</span>
+				</button>
+
+			</div>
+			<div class="subheader-card" id="faq">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="92px" fill="#fff">
+					<path d="M560-360q17 0 29.5-12.5T602-402q0-17-12.5-29.5T560-444q-17 0-29.5 12.5T518-402q0 17 12.5 29.5T560-360Zm0-128q11 0 20.5-8t11.5-21q2-12 8.5-22t23.5-27q30-30 40-48.5t10-43.5q0-45-31.5-73.5T560-760q-33 0-60 15t-43 43q-6 10-1 21t17 16q11 5 21.5 1t17.5-14q9-13 21-19.5t27-6.5q24 0 39 13.5t15 36.5q0 14-8 26.5T578-596q-29 25-37 38.5T531-518q-1 12 7.5 21t21.5 9ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-520q0-17 11.5-28.5T120-720q17 0 28.5 11.5T160-680v520h520q17 0 28.5 11.5T720-120q0 17-11.5 28.5T680-80H160Zm160-720v480-480Z" />
+				</svg>
+				<h2>F.A.Q</h2>
+				<span>Ответы на самые часто задаваемые вопросы</span>
+				<button class='anim-button $customClass'>
+					<div class='anim-button-before'>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="92px" fill="#fff">
+							<path d="M560-360q17 0 29.5-12.5T602-402q0-17-12.5-29.5T560-444q-17 0-29.5 12.5T518-402q0 17 12.5 29.5T560-360Zm0-128q11 0 20.5-8t11.5-21q2-12 8.5-22t23.5-27q30-30 40-48.5t10-43.5q0-45-31.5-73.5T560-760q-33 0-60 15t-43 43q-6 10-1 21t17 16q11 5 21.5 1t17.5-14q9-13 21-19.5t27-6.5q24 0 39 13.5t15 36.5q0 14-8 26.5T578-596q-29 25-37 38.5T531-518q-1 12 7.5 21t21.5 9ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-520q0-17 11.5-28.5T120-720q17 0 28.5 11.5T160-680v520h520q17 0 28.5 11.5T720-120q0 17-11.5 28.5T680-80H160Zm160-720v480-480Z" />
+						</svg>
+					</div>
+					<span>Перейти к F.A.Q"</span>
+				</button>
+
+			</div>
+		</section>
+		<section id="news">
+			<div id="new-header">
+				<h2>Новости</h2>
+				<div class="news__pagination">
+					<div class="news__pagination-pager">
+						<span>1</span>
+						<span>/5</span>
+					</div>
+
+					<div class="news__pagination-arrows">
+						<svg data-v-42948af1="" viewBox="0 0 30 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg-icon">
+							<line y1="-0.5" x2="29" y2="-0.5" transform="matrix(-1 0 0 1 30 6)" stroke="#818080"></line>
+							<line y1="-0.5" x2="7.07107" y2="-0.5" transform="matrix(0.707107 0.707107 0.707107 -0.707107 1 5)" stroke="#818080"></line>
+							<line x1="0.646447" y1="5.64645" x2="5.64645" y2="0.646447" stroke="#818080"></line>
+						</svg>
+						<svg data-v-42948af1="" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg-icon">
+							<rect width="2" height="7" fill="#545454"></rect>
+							<rect x="5" width="2" height="7" fill="#545454"></rect>
+						</svg>
+						<svg data-v-42948af1="" viewBox="0 0 30 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg-icon">
+							<line y1="5.5" x2="29" y2="5.5" stroke="#818080"></line>
+							<line x1="29.3536" y1="5.35355" x2="24.3536" y2="10.3536" stroke="#818080"></line>
+							<line y1="-0.5" x2="7.07107" y2="-0.5" transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 29 6)" stroke="#818080"></line>
+						</svg>
+					</div>
+
+				</div>
+
+			</div>
+			<div id="new-queue">
+				<div class="new-card">
+					<div> <img src="https://cdn.shazoo.ru/431340_aYhkVaUFvG_minecraft_dungeons.jpeg" alt="">
+					</div>
+					<div class="new-card-article">
+						<p class="title">На нашем дискорд-сервере появился раздел "известныe баги и их способы их решения"</p>
+						<div class="footer">
+							<div class="date">
+								<span>6</span>
+								<span>авг.2024</span>
+							</div>
+							<div class="views">
+								<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
+									<path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-134 0-244.5-72T61-462q-5-9-7.5-18.5T51-500q0-10 2.5-19.5T61-538q64-118 174.5-190T480-800q134 0 244.5 72T899-538q5 9 7.5 18.5T909-500q0 10-2.5 19.5T899-462q-64 118-174.5 190T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
+								</svg>
+								<span>91</span>
+							</div>
+							<div class="coments">
+								<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
+									<path d="M240-240 131-131q-14 14-32.5 6.34Q80-132.31 80-152v-668q0-24 18-42t42-18h680q24 0 42 18t18 42v520q0 24-18 42t-42 18H240Zm-26-60h606v-520H140v600l74-80Zm-74 0v-520 520Z" />
+								</svg>
+								<span>6</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="new-card">
+					<div> <img src="https://cdn.shazoo.ru/431340_aYhkVaUFvG_minecraft_dungeons.jpeg" alt="">
+					</div>
+					<div class="new-card-article">
+						<p class="title">БОЛЬШОЕ ОБНОВЛЕНИЕ!</p>
+						<div class="footer">
+							<div class="date">
+								<span>6</span>
+								<span>авг.2024</span>
+							</div>
+							<div class="views">
+								<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
+									<path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-134 0-244.5-72T61-462q-5-9-7.5-18.5T51-500q0-10 2.5-19.5T61-538q64-118 174.5-190T480-800q134 0 244.5 72T899-538q5 9 7.5 18.5T909-500q0 10-2.5 19.5T899-462q-64 118-174.5 190T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
+								</svg>
+								<span>102</span>
+							</div>
+							<div class="coments">
+								<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
+									<path d="M240-240 131-131q-14 14-32.5 6.34Q80-132.31 80-152v-668q0-24 18-42t42-18h680q24 0 42 18t18 42v520q0 24-18 42t-42 18H240Zm-26-60h606v-520H140v600l74-80Zm-74 0v-520 520Z" />
+								</svg>
+								<span>19</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="new-card">
+					<div> <img src="https://cdn.shazoo.ru/431340_aYhkVaUFvG_minecraft_dungeons.jpeg" alt="">
+					</div>
+					<div class="new-card-article">
+						<p class="title">Дополнение к Changelog 18.05</p>
+						<div class="footer">
+							<div class="date">
+								<span>6</span>
+								<span>авг.2024</span>
+							</div>
+							<div class="views">
+								<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
+									<path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-134 0-244.5-72T61-462q-5-9-7.5-18.5T51-500q0-10 2.5-19.5T61-538q64-118 174.5-190T480-800q134 0 244.5 72T899-538q5 9 7.5 18.5T909-500q0 10-2.5 19.5T899-462q-64 118-174.5 190T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
+								</svg>
+								<span>118</span>
+							</div>
+							<div class="coments">
+								<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
+									<path d="M240-240 131-131q-14 14-32.5 6.34Q80-132.31 80-152v-668q0-24 18-42t42-18h680q24 0 42 18t18 42v520q0 24-18 42t-42 18H240Zm-26-60h606v-520H140v600l74-80Zm-74 0v-520 520Z" />
+								</svg>
+								<span>8</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="new-card">
+					<div> <img src="https://cdn.shazoo.ru/431340_aYhkVaUFvG_minecraft_dungeons.jpeg" alt="">
+					</div>
+					<div class="new-card-article">
+						<p class="title">Changelog 18.05</p>
+						<div class="footer">
+							<div class="date">
+								<span>6</span>
+								<span>авг.2024</span>
+							</div>
+							<div class="views">
+								<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
+									<path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-134 0-244.5-72T61-462q-5-9-7.5-18.5T51-500q0-10 2.5-19.5T61-538q64-118 174.5-190T480-800q134 0 244.5 72T899-538q5 9 7.5 18.5T909-500q0 10-2.5 19.5T899-462q-64 118-174.5 190T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
+								</svg>
+								<span>118</span>
+							</div>
+							<div class="coments">
+								<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
+									<path d="M240-240 131-131q-14 14-32.5 6.34Q80-132.31 80-152v-668q0-24 18-42t42-18h680q24 0 42 18t18 42v520q0 24-18 42t-42 18H240Zm-26-60h606v-520H140v600l74-80Zm-74 0v-520 520Z" />
+								</svg>
+								<span>8</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer>
+			<div id="footer-logo">
+				<img src="" alt="">
+				<h3>Exarcheia</h3>
+				<span>2024, Все права защищены</span>
+			</div>
+			<nav>
+				<a href="">Скачать лаунчер</a>
+				<a href="">магазин</a>
+				<a href="">Рейтинг</a>
+				<a href="">правила сервера</a>
+			</nav>
+			<div class="social">
+				1
+				2
+				3
+			</div>
+		</footer>
+	</main>
+</body>
+<script>
+</script>
+
+</html>
